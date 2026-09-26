@@ -1,0 +1,354 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Real Estate House Price Prediction System</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head><body><!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+    <div class="logo">
+        🏠 RealEstate<span>ML</span>
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#predict">Prediction</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#performance">Performance</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+
+<!-- ================= HOME ================= -->
+<section id="home" class="hero">
+
+    <h1>Real Estate House Price Prediction System</h1>
+
+    <p>
+        Estimate house prices instantly using
+        <b>Multiple Linear Regression</b>
+    </p>
+
+    <a href="#predict" class="btn-primary">
+        Predict House Price
+    </a>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+<section id="about" class="section">
+
+    <h2>About the Project</h2>
+
+    <p>
+        The Real Estate House Price Prediction System is a machine
+        learning web application that predicts the estimated price
+        of a house based on multiple property features.
+    </p>
+
+    <br>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Machine Learning Algorithm</h3>
+            <p>Multiple Linear Regression</p>
+        </div>
+
+        <div class="card">
+            <h3>Backend</h3>
+            <p>Python + Flask</p>
+        </div>
+
+        <div class="card">
+            <h3>Machine Learning Library</h3>
+            <p>Scikit-learn</p>
+        </div>
+
+        <div class="card">
+            <h3>Dataset</h3>
+            <p>House property dataset</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PREDICTION ================= -->
+<section id="predict" class="section alt">
+
+    <h2>House Price Prediction</h2>
+
+    <p>
+        Enter the house details below to estimate its price.
+    </p>
+
+    <div class="predict-wrap">
+
+        <form id="predict-form" class="predict-form">
+
+            <label>
+                Area (sq.ft.)
+                <input
+                    type="number"
+                    id="area"
+                    min="200"
+                    max="10000"
+                    placeholder="Example: 1800"
+                    required
+                >
+            </label>
+
+
+            <label>
+                Bedrooms
+                <input
+                    type="number"
+                    id="bedrooms"
+                    min="1"
+                    max="6"
+                    placeholder="Example: 3"
+                    required
+                >
+            </label>
+
+
+            <label>
+                Bathrooms
+                <input
+                    type="number"
+                    id="bathrooms"
+                    min="1"
+                    max="6"
+                    placeholder="Example: 2"
+                    required
+                >
+            </label>
+
+
+            <label>
+                Floors
+                <input
+                    type="number"
+                    id="floors"
+                    min="1"
+                    max="4"
+                    placeholder="Example: 2"
+                    required
+                >
+            </label>
+
+
+            <label>
+                Parking Spaces
+                <input
+                    type="number"
+                    id="parking"
+                    min="0"
+                    max="4"
+                    placeholder="Example: 1"
+                    required
+                >
+            </label>
+
+
+            <label>
+                House Age (years)
+                <input
+                    type="number"
+                    id="age"
+                    min="0"
+                    max="50"
+                    placeholder="Example: 5"
+                    required
+                >
+            </label>
+
+
+            <label>
+                Location
+                <select id="location" required>
+                    <option value="">Select Location</option>
+                </select>
+            </label>
+
+
+            <button
+                type="submit"
+                id="predict-btn"
+                class="btn-primary"
+            >
+                Predict Price
+            </button>
+
+        </form>
+
+
+        <!-- Loading -->
+        <div id="loader" class="loader hidden">
+            ⏳ Predicting...
+        </div>
+
+
+        <!-- Error -->
+        <div id="error-box" class="error-box hidden"></div>
+
+
+        <!-- Result -->
+        <div id="result-box" class="result-box hidden">
+
+            <h2>Estimated House Price</h2>
+
+            <p
+                class="price"
+                id="result-price"
+            >
+                ₹0
+            </p>
+
+            <p class="note">
+                ⚠ This is an estimated prediction generated using
+                a trained <b>Multiple Linear Regression</b> model.
+                Actual market prices may vary.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= HOW IT WORKS ================= -->
+<section id="how" class="section">
+
+    <h2>How It Works</h2>
+
+    <p>
+        The system follows a complete machine learning pipeline.
+    </p>
+
+    <br>
+
+    <ul class="pipeline">
+
+        <li>1. Dataset</li>
+
+        <li>2. Data Cleaning</li>
+
+        <li>3. Missing Value Handling</li>
+
+        <li>4. Feature Selection</li>
+
+        <li>5. Location Encoding</li>
+
+        <li>6. Train/Test Split</li>
+
+        <li>7. Multiple Linear Regression</li>
+
+        <li>8. Model Training</li>
+
+        <li>9. Prediction</li>
+
+        <li>10. Model Evaluation</li>
+
+    </ul>
+
+</section>
+
+
+<!-- ================= PERFORMANCE ================= -->
+<section id="performance" class="section alt">
+
+    <h2>Model Performance</h2>
+
+    <p>
+        The following values are loaded automatically from the
+        trained model.
+    </p>
+
+    <br>
+
+    <div class="cards stats">
+
+        <div class="card stat">
+            <h3 id="stat-records">-</h3>
+            <p>Dataset Records</p>
+        </div>
+
+        <div class="card stat">
+            <h3 id="stat-features">-</h3>
+            <p>Features</p>
+        </div>
+
+        <div class="card stat">
+            <h3 id="stat-r2">-</h3>
+            <p>R² Score</p>
+        </div>
+
+        <div class="card stat">
+            <h3 id="stat-mae">-</h3>
+            <p>MAE</p>
+        </div>
+
+        <div class="card stat">
+            <h3 id="stat-rmse">-</h3>
+            <p>RMSE</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="section">
+
+    <h2>Project Information</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Project Title</h3>
+            <p>Real Estate House Price Prediction System</p>
+        </div>
+
+        <div class="card">
+            <h3>Algorithm</h3>
+            <p>Multiple Linear Regression</p>
+        </div>
+
+        <div class="card">
+            <h3>Technology</h3>
+            <p>Python, Flask, HTML, CSS and JavaScript</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+<footer>
+
+    <p>
+        © 2026 Real Estate House Price Prediction System
+    </p>
+
+    <p>
+        Developed using Multiple Linear Regression
+    </p>
+
+</footer>
+
+
+<!-- JavaScript -->
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
